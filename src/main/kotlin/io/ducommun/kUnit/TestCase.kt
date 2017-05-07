@@ -8,9 +8,15 @@ abstract class TestCase(val name: String) : TestCaseInterface {
     override fun setup(): Unit {}
 
     override final fun run(): Unit {
+
         setup()
+
         invokeOnSelf(method = findMethod(name))
+
+        teardown()
     }
+
+    override fun teardown() {}
 
     private fun invokeOnSelf(method: KFunction<*>): Unit {
         method.call(this)
@@ -29,4 +35,6 @@ interface TestCaseInterface {
     fun setup(): Unit
 
     fun run(): Unit
+
+    fun teardown(): Unit
 }

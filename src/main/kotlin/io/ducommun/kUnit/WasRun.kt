@@ -13,4 +13,8 @@ class WasRun : TestCase(name = "testMethod") {
     fun testMethod(): Unit {
         logInternal += "testMethod"
     }
+
+    override fun teardown() {
+        logInternal += "teardown"
+    }
 }

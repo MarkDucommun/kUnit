@@ -2,17 +2,19 @@ package io.ducommun.kUnit
 
 class WasRun : TestCase(name = "testMethod") {
 
-    private var wasSetupPrivate: Boolean = false
-    private var wasRunPrivate: Boolean = false
+    private var wasSetupInternal: Boolean = true
+    private var wasRunInternal: Boolean = false
+    private var logInternal: List<String> = listOf("setup")
 
-    val wasSetup: Boolean get() = wasSetupPrivate
-    val wasRun: Boolean get() = wasRunPrivate
+    val wasSetup: Boolean get() = wasSetupInternal
+    val wasRun: Boolean get() = wasRunInternal
+    val log: List<String> get() = logInternal
 
     override fun setup(): Unit {
-        wasSetupPrivate = true
+        wasSetupInternal = true
     }
 
     fun testMethod(): Unit {
-        wasRunPrivate = true
+        wasRunInternal = true
     }
 }

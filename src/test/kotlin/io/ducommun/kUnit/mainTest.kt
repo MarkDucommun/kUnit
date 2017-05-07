@@ -18,11 +18,9 @@ class TestCaseTest(name: String) : TestCase(name = name) {
 
     fun `it tracks whether the setup method was run`() {
 
-        assertThat(test.wasSetup).isFalse()
-
         test.run()
 
-        assertThat(test.wasSetup).isTrue()
+        assertThat(test.log).containsExactly("setup")
     }
 
     fun `it tracks whether the test method was run`() {

@@ -7,13 +7,15 @@ abstract class TestCase(val name: String) : TestCaseInterface {
 
     override fun setup(): Unit {}
 
-    override final fun run(): Unit {
+    override final fun run(): TestResult {
 
         setup()
 
         invokeOnSelf(method = findMethod(name))
 
         teardown()
+
+        TODO()
     }
 
     override fun teardown() {}
@@ -34,7 +36,9 @@ interface TestCaseInterface {
 
     fun setup(): Unit
 
-    fun run(): Unit
+    fun run(): TestResult
 
     fun teardown(): Unit
 }
+
+data class TestResult(val summary: String)

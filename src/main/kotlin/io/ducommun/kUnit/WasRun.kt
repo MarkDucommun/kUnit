@@ -3,7 +3,7 @@ package io.ducommun.kUnit
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.declaredFunctions
 
-class WasRun(val name: String) {
+class WasRun(val name: String) : TestCase() {
 
     private var wasRunPrivate: Boolean = false
 

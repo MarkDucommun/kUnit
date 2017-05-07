@@ -9,4 +9,6 @@ class TestResult{
     fun testStarted(): Unit {
         runCountInternal += 1
     }
+
+    fun testFailed(): Unit {}
 }

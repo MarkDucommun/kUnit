@@ -1,6 +1,6 @@
 package io.ducommun.kUnit
 
-class WasRun : TestCase(name = "testMethod") {
+class WasRun(name: String = "testMethod") : TestCase(name = name) {
 
     private var logInternal: List<String> = emptyList()
 
@@ -12,6 +12,10 @@ class WasRun : TestCase(name = "testMethod") {
 
     fun testMethod(): Unit {
         logInternal += "testMethod"
+    }
+
+    fun testBrokenMethod(): Unit {
+        throw RuntimeException()
     }
 
     override fun teardown() {

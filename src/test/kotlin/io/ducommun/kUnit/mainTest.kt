@@ -10,9 +10,13 @@ fun main(args: Array<String>) {
 
 class TestCaseTest(name: String) : TestCase(name = name) {
 
-    fun `it tracks whether the setup method was run`() {
+    lateinit var test: WasRun
 
-        val test = WasRun()
+    override fun setup() {
+        test = WasRun()
+    }
+
+    fun `it tracks whether the setup method was run`() {
 
         assertThat(test.wasSetup).isFalse()
 
@@ -22,8 +26,6 @@ class TestCaseTest(name: String) : TestCase(name = name) {
     }
 
     fun `it tracks whether the test method was run`() {
-
-        val test = WasRun()
 
         assertThat(test.wasRun).isFalse()
 

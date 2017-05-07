@@ -9,13 +9,17 @@ abstract class TestCase(val name: String) : TestCaseInterface {
 
     override final fun run(): TestResult {
 
+        val result = TestResult()
+
         setup()
+
+        result.testStarted()
 
         invokeOnSelf(method = findMethod(name))
 
         teardown()
 
-        return TestResult()
+        return result
     }
 
     override fun teardown() {}
@@ -43,5 +47,11 @@ interface TestCaseInterface {
 
 class TestResult{
 
-    val summary: String get() = "1 run, 0 failed"
+    private var runCountInternal: Int = 0
+
+    val summary: String get() = "$runCountInternal run, 0 failed"
+
+    fun testStarted(): Unit {
+        runCountInternal += 1
+    }
 }

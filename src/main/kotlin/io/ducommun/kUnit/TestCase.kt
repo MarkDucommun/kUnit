@@ -1,3 +1,3 @@
 package io.ducommun.kUnit
 
-abstract class TestCase
+abstract class TestCase(val name: String)

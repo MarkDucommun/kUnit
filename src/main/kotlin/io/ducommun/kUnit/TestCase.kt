@@ -5,7 +5,10 @@ import kotlin.reflect.full.declaredFunctions
 
 abstract class TestCase(val name: String) {
 
+    open fun setup(): Unit {}
+
     fun run(): Unit {
+        setup()
         invokeOnSelf(method = findMethod(name))
     }
 

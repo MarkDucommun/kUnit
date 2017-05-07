@@ -1,8 +1,5 @@
 package io.ducommun.kUnit
 
-import kotlin.reflect.KFunction
-import kotlin.reflect.full.declaredFunctions
-
 class WasRun : TestCase(name = "testMethod") {
 
     private var wasRunPrivate: Boolean = false

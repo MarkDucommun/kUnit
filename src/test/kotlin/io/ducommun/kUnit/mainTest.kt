@@ -1,14 +1,20 @@
 package io.ducommun.kUnit
 
 fun main(args: Array<String>) {
+    TestCaseTest().run()
+}
 
-    val test = WasRun()
+class TestCaseTest : TestCase(name = "it tracks whether the test method was run") {
 
-    // Should print false
-    println(test.wasRun)
+    fun `it tracks whether the test method was run`() {
+        val test = WasRun()
 
-    test.run()
+        // Should print false
+        println(test.wasRun)
 
-    // Should print true
-    println(test.wasRun)
+        test.run()
+
+        // Should print true
+        println(test.wasRun)
+    }
 }

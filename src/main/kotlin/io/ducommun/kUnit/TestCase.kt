@@ -1,3 +1,22 @@
 package io.ducommun.kUnit
 
-abstract class TestCase(val name: String)
+import kotlin.reflect.KFunction
+import kotlin.reflect.full.declaredFunctions
+
+abstract class TestCase(val name: String) {
+
+    fun run(): Unit {
+        invokeOnSelf(method = findMethod(name))
+    }
+
+    private fun invokeOnSelf(method: KFunction<*>): Unit {
+        method.call(this)
+    }
+
+    private fun findMethod(name: String): KFunction<*> {
+        return this::class
+                .declaredFunctions
+                .find { it.name == name }
+                ?: throw RuntimeException("No method matching '$name' found")
+    }
+}

@@ -3,7 +3,7 @@ package io.ducommun.kUnit
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.declaredFunctions
 
-class WasRun(name: String) : TestCase(name = name) {
+class WasRun : TestCase(name = "testMethod") {
 
     private var wasRunPrivate: Boolean = false
 
@@ -11,20 +11,5 @@ class WasRun(name: String) : TestCase(name = name) {
 
     fun testMethod(): Unit {
         wasRunPrivate = true
-    }
-
-    fun run(): Unit {
-        invokeOnSelf(method = findMethod(name))
-    }
-
-    private fun invokeOnSelf(method: KFunction<*>): Unit {
-        method.call(this)
-    }
-
-    private fun findMethod(name: String): KFunction<*> {
-        return this::class
-                .declaredFunctions
-                .find { it.name == name }
-                ?: throw RuntimeException("No method matching '$name' found")
     }
 }

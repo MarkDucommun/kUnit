@@ -1,8 +1,12 @@
 package io.ducommun.kUnit
 
-class WasRun(var wasRun: Boolean = false) {
+class WasRun {
+
+    private var wasRunPrivate: Boolean = false
+
+    val wasRun: Boolean get() = wasRunPrivate
 
     fun testMethod(): Unit {
-        wasRun = true
+        wasRunPrivate = true
     }
 }

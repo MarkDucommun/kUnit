@@ -1,5 +1,6 @@
 package io.ducommun.kUnit
 
+import kotlin.reflect.KFunction
 import kotlin.reflect.full.declaredFunctions
 
 class WasRun(val name: String) {
@@ -13,10 +14,17 @@ class WasRun(val name: String) {
     }
 
     fun run(): Unit {
-        this::class
+        invokeOnSelf(method = findMethod(name))
+    }
+
+    private fun invokeOnSelf(method: KFunction<*>): Unit {
+        method.call(this)
+    }
+
+    private fun findMethod(name: String): KFunction<*> {
+        return this::class
                 .declaredFunctions
                 .find { it.name == name }
-                ?.call(this)
                 ?: throw RuntimeException("No method matching '$name' found")
     }
 }

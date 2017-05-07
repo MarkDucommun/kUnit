@@ -1,6 +1,8 @@
 package io.ducommun.kUnit
 
-class WasRun {
+import kotlin.reflect.full.declaredFunctions
+
+class WasRun(val name: String) {
 
     private var wasRunPrivate: Boolean = false
 
@@ -11,6 +13,10 @@ class WasRun {
     }
 
     fun run(): Unit {
-        testMethod()
+        this::class
+                .declaredFunctions
+                .find { it.name == name }
+                ?.call(this)
+                ?: throw RuntimeException("No method matching '$name' found")
     }
 }

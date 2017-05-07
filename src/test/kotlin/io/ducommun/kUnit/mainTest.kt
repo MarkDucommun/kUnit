@@ -2,7 +2,7 @@ package io.ducommun.kUnit
 
 fun main(args: Array<String>) {
 
-    val test = WasRun()
+    val test = WasRun("testMethod")
 
     // Should print false
     println(test.wasRun)

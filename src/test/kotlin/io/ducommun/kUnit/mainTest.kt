@@ -1,5 +1,8 @@
 package io.ducommun.kUnit
 
+import org.assertj.core.api.KotlinAssertions.assertThat
+
+
 fun main(args: Array<String>) {
     TestCaseTest().run()
 }
@@ -7,14 +10,13 @@ fun main(args: Array<String>) {
 class TestCaseTest : TestCase(name = "it tracks whether the test method was run") {
 
     fun `it tracks whether the test method was run`() {
+
         val test = WasRun()
 
-        // Should print false
-        println(test.wasRun)
+        assertThat(test.wasRun).isFalse()
 
         test.run()
 
-        // Should print true
-        println(test.wasRun)
+        assertThat(test.wasRun).isTrue()
     }
 }

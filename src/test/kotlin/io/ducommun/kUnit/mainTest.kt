@@ -15,6 +15,6 @@ class TestCaseTest(name: String) : TestCase(name = name) {
 
         test.run()
 
-        assertThat(test.log).containsExactly("setup", "testMethod")
+        assertThat(test.log).containsExactly("setup", "testMethod", "teardown")
     }
 }

@@ -3,11 +3,11 @@ package io.ducommun.kUnit
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.declaredFunctions
 
-abstract class TestCase(val name: String) {
+abstract class TestCase(val name: String) : TestCaseInterface {
 
-    open fun setup(): Unit {}
+    override fun setup(): Unit {}
 
-    fun run(): Unit {
+    override final fun run(): Unit {
         setup()
         invokeOnSelf(method = findMethod(name))
     }
@@ -22,4 +22,11 @@ abstract class TestCase(val name: String) {
                 .find { it.name == name }
                 ?: throw RuntimeException("No method matching '$name' found")
     }
+}
+
+interface TestCaseInterface {
+
+    fun setup(): Unit
+
+    fun run(): Unit
 }

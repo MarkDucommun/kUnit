@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     // Should print false
     println(test.wasRun)
 
-    test.testMethod()
+    test.run()
 
     // Should print true
     println(test.wasRun)

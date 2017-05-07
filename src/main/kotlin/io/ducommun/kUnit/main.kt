@@ -9,4 +9,8 @@ class WasRun {
     fun testMethod(): Unit {
         wasRunPrivate = true
     }
+
+    fun run(): Unit {
+        testMethod()
+    }
 }

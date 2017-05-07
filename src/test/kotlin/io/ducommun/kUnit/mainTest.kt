@@ -4,33 +4,17 @@ import org.assertj.core.api.KotlinAssertions.assertThat
 
 
 fun main(args: Array<String>) {
-    TestCaseTest("it tracks whether the setup method was run").run()
-    TestCaseTest("it tracks whether the test method was run").run()
+    TestCaseTest("it tracks that the correct methods have been called in order").run()
 }
 
 class TestCaseTest(name: String) : TestCase(name = name) {
 
-    lateinit var test: WasRun
+    fun `it tracks that the correct methods have been called in order`() {
 
-    override fun setup() {
-        test = WasRun()
-    }
-
-    fun `it tracks whether the setup method was run`() {
+        val test = WasRun()
 
         test.run()
 
-        assertThat(test.log).containsExactly("setup")
-    }
-
-    fun `it tracks whether the test method was run`() {
-
-        assertThat(test.wasRun).isFalse()
-
-        test.run()
-
-        assertThat(test.wasRun).isTrue()
+        assertThat(test.log).containsExactly("setup", "testMethod")
     }
 }
-
-class Test

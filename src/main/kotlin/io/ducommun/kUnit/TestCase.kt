@@ -35,23 +35,3 @@ abstract class TestCase(val name: String) : TestCaseInterface {
                 ?: throw RuntimeException("No method matching '$name' found")
     }
 }
-
-interface TestCaseInterface {
-
-    fun setup(): Unit
-
-    fun run(): TestResult
-
-    fun teardown(): Unit
-}
-
-class TestResult{
-
-    private var runCountInternal: Int = 0
-
-    val summary: String get() = "$runCountInternal run, 0 failed"
-
-    fun testStarted(): Unit {
-        runCountInternal += 1
-    }
-}

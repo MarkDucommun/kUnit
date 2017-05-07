@@ -15,7 +15,11 @@ abstract class TestCase(val name: String) : TestCaseInterface {
 
         result.testStarted()
 
-        invokeOnSelf(method = findMethod(name))
+        try {
+            invokeOnSelf(method = findMethod(name))
+        } catch (e: Exception) {
+            result.testFailed()
+        }
 
         teardown()
 

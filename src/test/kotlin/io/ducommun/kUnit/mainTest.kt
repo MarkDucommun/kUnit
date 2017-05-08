@@ -4,14 +4,17 @@ import org.assertj.core.api.KotlinAssertions.assertThat
 
 
 fun main(args: Array<String>) {
-    val result = TestResult()
-    TestCaseTest("it tracks that the correct methods have been called in order").run(result)
-    TestCaseTest("it reports the number of test cases run").run(result)
-    TestCaseTest("it formats a failed result properly").run(result)
-    TestCaseTest("it reports the number of failures in a run accurately").run(result)
-    TestCaseTest("it catches exceptions in setup").run(result)
-    TestCaseTest("it can run a suite and report the results").run(result)
-    result.summarize()
+
+    val suite = TestSuite()
+
+    suite.add(TestCaseTest("it tracks that the correct methods have been called in order"))
+    suite.add(TestCaseTest("it reports the number of test cases run"))
+    suite.add(TestCaseTest("it formats a failed result properly"))
+    suite.add(TestCaseTest("it reports the number of failures in a run accurately"))
+    suite.add(TestCaseTest("it catches exceptions in setup"))
+    suite.add(TestCaseTest("it can run a suite and report the results"))
+
+    suite.run().summarize()
 }
 
 fun TestResult.summarize() = println(summary)

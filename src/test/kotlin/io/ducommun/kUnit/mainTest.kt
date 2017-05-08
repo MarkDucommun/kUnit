@@ -83,12 +83,3 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         assertThat(result.summary).isEqualTo("2 run, 1 failed")
     }
 }
-
-class DummyTestCase(name: String): TestCase(name = name) {
-
-    @Test
-    fun working() { assertThat(true).isTrue() }
-
-    @Test
-    fun failing() { throw RuntimeException() }
-}

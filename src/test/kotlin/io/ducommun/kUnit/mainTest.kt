@@ -9,6 +9,7 @@ fun main(args: Array<String>) {
     TestCaseTest("it formats a failed result properly").run().summarize()
     TestCaseTest("it reports the number of failures in a run accurately").run().summarize()
     TestCaseTest("it catches exceptions in setup").run().summarize()
+    TestCaseTest("it can run a suite and report the results").run().summarize()
 }
 
 fun TestResult.summarize() = println(summary)
@@ -60,5 +61,17 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         val result = test.run()
 
         assertThat(result.summary).isEqualTo("1 run, 1 failed")
+    }
+
+    fun `it can run a suite and report the results`() {
+
+        val suite = TestSuite()
+
+        suite.add(WasRun("testMethod"))
+        suite.add(WasRun("testBrokenMethod"))
+
+        val result = suite.run()
+
+        assertThat(result.summary).isEqualTo("2 run, 1 failed")
     }
 }

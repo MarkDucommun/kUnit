@@ -67,14 +67,12 @@ class TestCaseTest(name: String) : TestCase(name = name) {
     @Test
     fun `it can run a suite and report the results`() {
 
-        val suite = TestSuite()
+        val suite = TestSuite(listOf(
+                WasRun("testMethod"),
+                WasRun("testBrokenMethod")
+        ))
 
-        suite.add(WasRun("testMethod"))
-        suite.add(WasRun("testBrokenMethod"))
-
-        val result = suite.run()
-
-        assertThat(result.summary).isEqualTo("2 run, 1 failed")
+        assertThat(suite.result.summary).isEqualTo("2 run, 1 failed")
     }
 
     @Test

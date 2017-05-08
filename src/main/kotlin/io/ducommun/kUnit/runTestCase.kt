@@ -8,17 +8,9 @@ import kotlin.reflect.full.primaryConstructor
 
 inline fun <reified T: TestCase> KClass<T>.runTestCase(): TestResult {
 
-    val suite = TestSuite()
+    return TestSuite(declaredFunctions.map { function ->
 
-    declaredFunctions.map { function ->
+        function.findAnnotation<Test>()?.let { primaryConstructor?.call(function.name) }
 
-        function.findAnnotation<Test>()?.let {
-
-            val instance = primaryConstructor?.call(function.name) ?: throw RuntimeException("No constructor?")
-
-            suite.add(instance)
-        }
-    }
-
-    return suite.run()
+    }.filterNotNull()).result
 }

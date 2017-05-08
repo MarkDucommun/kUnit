@@ -11,11 +11,10 @@ abstract class TestCase(val name: String) : TestCaseInterface {
 
         val result = TestResult()
 
-        setup()
-
         result.testStarted()
 
         try {
+            setup()
             invokeOnSelf(method = findMethod(name))
         } catch (e: Exception) {
             result.testFailed()

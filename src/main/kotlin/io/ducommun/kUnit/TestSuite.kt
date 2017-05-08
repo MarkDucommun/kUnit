@@ -2,10 +2,9 @@ package io.ducommun.kUnit
 
 class TestSuite {
 
-    fun add(case: TestCase): Unit {}
+    var testCases: List<TestCase> = emptyList()
 
-    fun run(): TestResult {
+    fun add(case: TestCase): Unit { testCases += case }
 
-        return TestResult()
-    }
+    fun run(): TestResult = testCases.fold(TestResult()) { result, it -> it.run(result) }
 }

@@ -4,7 +4,7 @@ interface TestCaseInterface {
 
     fun setup(): Unit
 
-    fun run(): TestResult
+    fun run(testResult: TestResult = TestResult()): TestResult
 
     fun teardown(): Unit
 }

@@ -7,9 +7,7 @@ abstract class TestCase(val name: String) : TestCaseInterface {
 
     override fun setup(): Unit {}
 
-    override final fun run(): TestResult {
-
-        val result = TestResult()
+    override final fun run(result: TestResult): TestResult {
 
         result.testStarted()
 

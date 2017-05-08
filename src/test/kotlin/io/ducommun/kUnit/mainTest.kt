@@ -5,23 +5,14 @@ import org.assertj.core.api.KotlinAssertions.assertThat
 
 fun main(args: Array<String>) {
 
-    val suite = TestSuite().apply {
-        add(TestCaseTest("it tracks that the correct methods have been called in order"))
-        add(TestCaseTest("it reports the number of test cases run"))
-        add(TestCaseTest("it formats a failed result properly"))
-        add(TestCaseTest("it reports the number of failures in a run accurately"))
-        add(TestCaseTest("it catches exceptions in setup"))
-        add(TestCaseTest("it can run a suite and report the results"))
-        add(TestCaseTest("it can populate a suite automatically using Test annotations"))
-    }
-
-    suite.run().summarize()
+    TestCaseTest::class.runTestCase().summarize()
 }
 
 fun TestResult.summarize() = println(summary)
 
 class TestCaseTest(name: String) : TestCase(name = name) {
 
+    @Test
     fun `it tracks that the correct methods have been called in order`() {
 
         val test = WasRun()
@@ -31,6 +22,7 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         assertThat(test.log).containsExactly("setup", "testMethod", "teardown")
     }
 
+    @Test
     fun `it reports the number of test cases run`() {
 
         val test = WasRun()
@@ -40,6 +32,7 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         assertThat(result.summary).isEqualTo("1 run, 0 failed")
     }
 
+    @Test
     fun `it reports the number of failures in a run accurately`() {
 
         val test = WasRun(name = "testBrokenMethod")
@@ -49,6 +42,7 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         assertThat(result.summary).isEqualTo("1 run, 1 failed")
     }
 
+    @Test
     fun `it formats a failed result properly`() {
 
         val result = TestResult()
@@ -60,6 +54,7 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         assertThat(result.summary).isEqualTo("1 run, 1 failed")
     }
 
+    @Test
     fun `it catches exceptions in setup`() {
 
         val test = BrokenSetup()
@@ -69,6 +64,7 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         assertThat(result.summary).isEqualTo("1 run, 1 failed")
     }
 
+    @Test
     fun `it can run a suite and report the results`() {
 
         val suite = TestSuite()
@@ -81,9 +77,10 @@ class TestCaseTest(name: String) : TestCase(name = name) {
         assertThat(result.summary).isEqualTo("2 run, 1 failed")
     }
 
+    @Test
     fun `it can populate a suite automatically using Test annotations`() {
 
-        val result = runTestCase(DummyTestCase::class)
+        val result = DummyTestCase::class.runTestCase()
 
         assertThat(result.summary).isEqualTo("2 run, 1 failed")
     }

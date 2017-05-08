@@ -12,6 +12,7 @@ fun main(args: Array<String>) {
         add(TestCaseTest("it reports the number of failures in a run accurately"))
         add(TestCaseTest("it catches exceptions in setup"))
         add(TestCaseTest("it can run a suite and report the results"))
+        add(TestCaseTest("it can populate a suite automatically using Test annotations"))
     }
 
     suite.run().summarize()
@@ -79,4 +80,20 @@ class TestCaseTest(name: String) : TestCase(name = name) {
 
         assertThat(result.summary).isEqualTo("2 run, 1 failed")
     }
+
+    fun `it can populate a suite automatically using Test annotations`() {
+
+        val result = runTestCase(DummyTestCase::class)
+
+        assertThat(result.summary).isEqualTo("2 run, 1 failed")
+    }
+}
+
+class DummyTestCase(name: String): TestCase(name = name) {
+
+    @Test
+    fun working() { assertThat(true).isTrue() }
+
+    @Test
+    fun failing() { throw RuntimeException() }
 }

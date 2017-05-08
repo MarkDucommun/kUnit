@@ -1,7 +1,9 @@
 package io.ducommun.kUnit
 
 import kotlin.reflect.KFunction
+import kotlin.reflect.full.createInstance
 import kotlin.reflect.full.declaredFunctions
+import kotlin.reflect.full.primaryConstructor
 
 abstract class TestCase(val name: String) : TestCaseInterface {
 
